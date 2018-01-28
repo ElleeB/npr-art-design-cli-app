@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+
+## CLI Code ##
+
+require '.lib/npr_design'
+
+Npr_Design::CLI.new.call
