@@ -4,6 +4,21 @@ class NprDesign::Story
 
   @stories = []
 
+  def initialize
+  end
+
+  def self.create_from_collection
+  end
+
+  def add_attributes
+  end
+
+  def menu_display
+  end
+
+  def text_display
+  end
+
 
   def self.all
 
