@@ -7,3 +7,4 @@ require_relative './scraper.rb'
 
 require 'nokogiri'
 require 'open-uri'
+require 'date'
