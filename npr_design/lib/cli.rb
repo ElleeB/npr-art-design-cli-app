@@ -5,7 +5,6 @@ class NprDesign::CLI
     puts ""
     menu
     story_details
-    goodbye
   end
 
   def menu
@@ -15,17 +14,25 @@ class NprDesign::CLI
 
     NprDesign::Story.all.each.with_index(1){|x, i| puts "#{i}. #{x}"}
 
-    # Invite user to enter which story they'd like to learn more about
-    puts "Please enter the corresponding number for your story of interest."
-    story_details
   end
 
   def story_details
+    # Invite user to enter which story they'd like to learn more about
+    puts "Please enter the corresponding number for your story of interest."
+
     # Gets input string-number corresponding to story
     input = gets.strip
-    puts "#{input} pow!"
-    # Display story: Title, Date, Author, Text
-    # Options: Quit, Return to Menu
+    if valid?
+      if input > 0
+        #story_instance.text_display
+      elsif input == "menu"
+        menu
+      elsif input == "exit"
+        goodbye
+      end
+    else
+      puts "Please enter a valid number"
+    end
   end
 
   def valid?(input)
