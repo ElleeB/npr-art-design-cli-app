@@ -1,2 +1,2 @@
-class Story
+class NprDesign::Story
 end

@@ -2,6 +2,8 @@
 
 ## CLI Code ##
 
-require '.lib/npr_design'
+puts "Hello Users!"
 
-Npr_Design::CLI.new.call
+require_relative '../lib/npr_design'
+
+NprDesign::CLI.new.call

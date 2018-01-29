@@ -11,4 +11,4 @@ require "npr_design"
 # Pry.start
 
 require "irb"
-IRB.start(__FILE__)
+IRB.start("./lib/cli.rb")
