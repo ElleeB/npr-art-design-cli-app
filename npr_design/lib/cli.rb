@@ -14,7 +14,7 @@ class NprDesign::CLI
     puts "Here are your weekly stories:"
     puts ""
 
-    menu = NprDesign::Story.all.each.with_index(1){|x, i| puts "#{i}. #{x}" }
+    menu = NprDesign::Story.all.each.with_index(1){|x, i| puts "#{i}. #{x}"}
 
     # Invite user to enter which story they'd like to learn more about
     puts "Please enter the corresponding number for your story of interest."
