@@ -1,6 +1,6 @@
 class NprDesign::Story
 
-  attr_accessor :title, :author, :category, :blurb, :text, :date
+  attr_accessor :title, :author, :category, :blurb, :text, :date, :url
 
   @@stories = []
 
