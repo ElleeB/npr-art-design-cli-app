@@ -1,9 +1,5 @@
 #!/usr/bin/env ruby
 
-## CLI Code ##
-
-puts "Hello Users!"
-
 require_relative '../lib/npr_design'
 
 NprDesign::CLI.new.call
