@@ -1,18 +1,22 @@
 class NprDesign::Scraper
 
-  @stories_array = []
-
   def self.menu_scraper(menu_url)
-    # gets title, author, story.url
+    @menu_hash = {:title => nil, :url => nil}
+    # gets title, story.url
     doc = Nokogiri::HTML(open(menu_url))
-    stories = doc.css("h2.title").css("a")
-    links = stories.search("a").map{|a| a["href"]}
-    links
-    #=> returns array of urls
+    stories = doc.css("section#main-section")
+    stories.each do |story|
+      @stories = stories.css("h2.title a")
+    end
+    @stories.each do |x|
+      @menu_hash[:title] = "#{x.text}"
+      @menu_hash[:url] = "#{x['href']}"
+    end
+    @menu_hash
   end
 
-  def self.story_scraper(story_url)
-    # story.url
+  def self.story_scraper(menu_hash)
+    @story_hash = {:author => nil, :category => nil, :blurb => nil, :text => nil, :date => nil}
     # gets text and additional story attributes
   end
 
