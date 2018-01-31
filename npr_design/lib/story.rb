@@ -4,21 +4,26 @@ class NprDesign::Story
 
   @@stories = []
 
-  def initialize(title, author)
+  def initialize
     @title = title
     @author = author
-    # @category = nil
-    # @blurb = nil
-    # @text = nil
-    # @date = nil
+    @category = category
+    @blurb = blurb
+    @text = text
+    @date = date
   end
 
   def save
     @@stories << self
   end
 
-  def self.create_from_collection
+  def self.create_from_collection(stories_array)
+    stories_array.each do |story|
+      self.title = "#{story[:title]}"
+      puts self.title
+    end
   end
+
 
   def add_attributes
   end
