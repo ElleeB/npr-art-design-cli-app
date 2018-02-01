@@ -1,6 +1,6 @@
 class NprDesign::Story
 
-  attr_accessor :title, :author, :category, :blurb, :text, :url
+  attr_accessor :title, :author, :category, :blurb, :text, :credits, :url
 
   @@all = []
 
@@ -15,6 +15,7 @@ class NprDesign::Story
     @category = category
     @blurb = blurb
     @text = text
+    @credits = credits
     @url = url
     self.save
   end
@@ -25,11 +26,13 @@ class NprDesign::Story
       new_story.title = story[:title]
       new_story.category = story[:category] ### !!! if no category, nil !!! ###
       new_story.blurb = story[:blurb]
+      new_story.credits = story[:credits]
       new_story.url = story[:url]
     end
   end
 
-  def add_text_and_author ### !!! no author showing up when display text via cli !!! ###
+  def add_attributes ### !!! no author showing up when display text via cli !!! ###
+    #adds author, text, and credits
     doc = Nokogiri::HTML(open(self.url))
     #remove unwanted elements
     f = Nokogiri::XML.fragment(doc) ### can this be wrapped up? ###
@@ -40,9 +43,11 @@ class NprDesign::Story
       f.search("div.credit-caption div.caption-wrap div.caption p b.credit").remove
       f.search("div.imagewrap img src").remove
       f.search("div.credit-caption div.caption-wrap span.credit").remove
+      f.search("aside#ad-standard-wrap").remove
 
     self.text = f.css("div#storytext.storytext.storylocation.linkLocation p").text
-    self.author = doc.css("p.byline__name byline__name--block").text ### !!! if no author, nil !!! ###
+    self.author = doc.css("div.byline a").text.strip ### !!! if no author, nil !!! ###
+    self.credits = f.css("div.bucket p").text
   end
 
   def save

@@ -21,7 +21,7 @@ class NprDesign::CLI
 
   def add_attributes
     NprDesign::Story.all.each do |story|
-      story.add_text_and_author
+      story.add_attributes
     end
   end
 
@@ -32,7 +32,7 @@ class NprDesign::CLI
     NprDesign::Story.all.each.with_index(1) do |x, i| # display_menu_items
       puts "#{i}. #{x.title}"
       puts ""
-      puts "#{x.category}" ### !!! some not listing category - do some not have a category? !!! ###
+      puts "#{x.category}" ### !!! some not listing category - do some not have a category? !!! ### ex. 13. Exhibit Featuring 20 Red Punching Bags Opens At LA Art Show
       puts ""
       puts "#{x.blurb}"
       puts ""
@@ -54,11 +54,11 @@ class NprDesign::CLI
     if input.to_i > 0
       ### display_story ###
       story = NprDesign::Story.all[input.to_i - 1]
-      ### !!! unicorn sparkles story still displaying additional text in blurb !!! ###
-      # "With a pinch of skepticism and a dash of fun, The Salt covers food news from the farm to the plate and beyond. You can connect with senior editor and host Maria Godoy via our contact form or directly by email. You can also reach correspondent Allison Aubrey via email.NPR thanks our sponsorsBecome an NPR sponsor"
-      puts story.author ### !!! no author !!! ###
+      puts "#{story.title}, #{story.author}"
       puts ""
-      puts story.text
+      puts story.text.gsub("#{story.credits}", "")
+      puts ""
+      puts story.credits
     elsif input == "menu"
       menu
     elsif input == "exit"
@@ -67,7 +67,7 @@ class NprDesign::CLI
 
     def display_story
       # try to make the reading/text return pretty
-      
+
       # student scraper example:
       #   Student.all.each do |student|
       #     puts "#{student.name.upcase}".colorize(:blue)
@@ -81,7 +81,7 @@ class NprDesign::CLI
       #     puts "----------------------".colorize(:green)
       #   end
 
-      end
+      # end
     end
 
   # else
