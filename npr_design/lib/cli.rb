@@ -31,8 +31,12 @@ class NprDesign::CLI
     puts ""
     NprDesign::Story.all.each.with_index(1) do |x, i| # display_menu_items
       puts "#{i}. #{x.title}"
+      puts ""
       puts "#{x.category}" ### !!! some not listing category - do some not have a category? !!! ###
+      puts ""
       puts "#{x.blurb}"
+      puts ""
+      puts ""
     end
   end
 
@@ -46,7 +50,7 @@ class NprDesign::CLI
     puts "Please enter the corresponding number for your story of interest, 'menu' to return to the story menu, or 'exit' to exit the program."
     # Gets input string-number corresponding to story
     input = gets.strip
-    #if valid?
+    #if valid? (is this necessary?)
     if input.to_i > 0
       ### display_story ###
       story = NprDesign::Story.all[input.to_i - 1]
@@ -63,6 +67,21 @@ class NprDesign::CLI
 
     def display_story
       # try to make the reading/text return pretty
+      
+      # student scraper example:
+      #   Student.all.each do |student|
+      #     puts "#{student.name.upcase}".colorize(:blue)
+      #     puts "  location:".colorize(:light_blue) + " #{student.location}"
+      #     puts "  profile quote:".colorize(:light_blue) + " #{student.profile_quote}"
+      #     puts "  bio:".colorize(:light_blue) + " #{student.bio}"
+      #     puts "  twitter:".colorize(:light_blue) + " #{student.twitter}"
+      #     puts "  linkedin:".colorize(:light_blue) + " #{student.linkedin}"
+      #     puts "  github:".colorize(:light_blue) + " #{student.github}"
+      #     puts "  blog:".colorize(:light_blue) + " #{student.blog}"
+      #     puts "----------------------".colorize(:green)
+      #   end
+
+      end
     end
 
   # else
@@ -71,7 +90,7 @@ class NprDesign::CLI
 
   end
 
-  def valid?(input)
+  def valid?(input) # necessary?
   end
 
   def goodbye

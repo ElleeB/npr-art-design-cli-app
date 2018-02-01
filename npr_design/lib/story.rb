@@ -23,7 +23,7 @@ class NprDesign::Story
     stories_array.each do |story| ### can .send help me here? ###
       new_story = NprDesign::Story.new
       new_story.title = story[:title]
-      new_story.category = story[:category]
+      new_story.category = story[:category] ### !!! if no category, nil !!! ###
       new_story.blurb = story[:blurb]
       new_story.url = story[:url]
     end
@@ -42,7 +42,7 @@ class NprDesign::Story
       f.search("div.credit-caption div.caption-wrap span.credit").remove
 
     self.text = f.css("div#storytext.storytext.storylocation.linkLocation p").text
-    self.author = doc.css("p.byline__name byline__name--block").text
+    self.author = doc.css("p.byline__name byline__name--block").text ### !!! if no author, nil !!! ###
   end
 
   def save
