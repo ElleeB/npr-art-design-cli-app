@@ -26,12 +26,12 @@ class NprDesign::CLI
   end
 
   def menu
-    puts "Today's date: #{Date.today}"
+    # puts "Today's date: #{Date.today}"
     puts "Here are your weekly stories:"
     puts ""
     NprDesign::Story.all.each.with_index(1) do |x, i| # display_menu_items
       puts "#{i}. #{x.title}"
-      puts "#{x.category}" #some not listing category - do some not have a category?
+      puts "#{x.category}" ### !!! some not listing category - do some not have a category? !!! ###
       puts "#{x.blurb}"
     end
   end
@@ -48,7 +48,13 @@ class NprDesign::CLI
     input = gets.strip
     #if valid?
     if input.to_i > 0
-      puts "Storytime!" ### display_story ###
+      ### display_story ###
+      story = NprDesign::Story.all[input.to_i - 1]
+      ### !!! unicorn sparkles story still displaying additional text in blurb !!! ###
+      # "With a pinch of skepticism and a dash of fun, The Salt covers food news from the farm to the plate and beyond. You can connect with senior editor and host Maria Godoy via our contact form or directly by email. You can also reach correspondent Allison Aubrey via email.NPR thanks our sponsorsBecome an NPR sponsor"
+      puts story.author ### !!! no author !!! ###
+      puts ""
+      puts story.text
     elsif input == "menu"
       menu
     elsif input == "exit"

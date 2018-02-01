@@ -10,8 +10,8 @@ class NprDesign::Scraper
     info.each do |story|
       menu_hash = {:title => nil, :blurb => nil, :category => nil, :url => nil}
       menu_hash[:title] = story.css("h2.title").text
-      menu_hash[:category] = story.css("h3.slug a").text
-      menu_hash[:blurb] = story.css("p.teaser").text #minus the first however many characters to remove date
+      menu_hash[:category] = story.css("h3.slug a").text ### !!! some not listing category when called in cli - do some not have a category? !!! ###
+      menu_hash[:blurb] = story.css("p.teaser").text ### !!! minus the first however many characters to remove date !!! ###
       menu_hash[:url] = story.at("p.teaser a")["href"]
       @stories_array << menu_hash
     end

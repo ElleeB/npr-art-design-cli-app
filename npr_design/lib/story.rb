@@ -29,7 +29,7 @@ class NprDesign::Story
     end
   end
 
-  def add_text_and_author
+  def add_text_and_author ### !!! no author showing up when display text via cli !!! ###
     doc = Nokogiri::HTML(open(self.url))
     #remove unwanted elements
     f = Nokogiri::XML.fragment(doc) ### can this be wrapped up? ###
