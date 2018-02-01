@@ -4,7 +4,7 @@ class NprDesign::Story
 
   @@all = []
 
-  def initialize
+  def initialize # make this prettier
   # def initialize(params)
   #   params.each do |key, value|
   #     instance_variable_set("@#{key}", value)
@@ -20,7 +20,7 @@ class NprDesign::Story
   end
 
   def self.create_from_collection(stories_array)
-    stories_array.each do |story|
+    stories_array.each do |story| ### can .send help me here? ###
       new_story = NprDesign::Story.new
       new_story.title = story[:title]
       new_story.category = story[:category]
@@ -32,7 +32,7 @@ class NprDesign::Story
   def add_text_and_author
     doc = Nokogiri::HTML(open(self.url))
     #remove unwanted elements
-    f = Nokogiri::XML.fragment(doc)
+    f = Nokogiri::XML.fragment(doc) ### can this be wrapped up? ###
 
       f.search("div.credit-caption div.caption-wrap").remove
       f.search("div.enlarge-options button.enlargebtn").remove

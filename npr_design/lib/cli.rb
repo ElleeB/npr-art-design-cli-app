@@ -3,6 +3,10 @@ class NprDesign::CLI
   def call
     puts "Welcome to Your NPR News: Art & Design Edition"
     puts ""
+    run
+  end
+
+  def run
     make_stories
     add_attributes
     menu
@@ -34,7 +38,7 @@ class NprDesign::CLI
     input = gets.strip
     #if valid?
     if input.to_i > 0
-      puts "Storytime!" ### display_story
+      puts "Storytime!" ### display_story ###
     elsif input == "menu"
       menu
     elsif input == "exit"
