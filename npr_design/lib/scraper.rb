@@ -14,8 +14,21 @@ class NprDesign::Scraper
       @menu_hash[:blurb] = story.css("p.teaser").text #minus the first however many characters to remove date
       @stories_array << @menu_hash
     end
-
     @stories_array
   end
 
+  def self.text_scraper(story_url)
+    doc = Nokogiri::HTML(open(story_url))
+    #remove unwanted elements
+    f = Nokogiri::XML.fragment(doc)
+    f.search("div.credit-caption div.caption-wrap").remove
+    f.search("div.enlarge-options button.enlargebtn").remove
+    f.search("div.credit-caption div.caption-wrap div.caption p").remove
+    f.search("div.credit-caption div.caption-wrap div.caption p b.credit").remove
+    f.search("div.imagewrap img src").remove
+    f.search("div.credit-caption div.caption-wrap span.credit").remove
+
+    @text = f.css("div#storytext.storytext.storylocation.linkLocation p").text
+  end
+  @text
 end
