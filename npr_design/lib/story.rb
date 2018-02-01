@@ -12,7 +12,7 @@ class NprDesign::Story
     @blurb = blurb
     @text = text
     @url = url
-    @@all << self
+    self.save
   end
 
 
@@ -26,28 +26,24 @@ class NprDesign::Story
     end
   end
 
-
-  def text_display
-    doc = Nokogiri::HTML(open("https://www.npr.org/sections/thesalt/2017/12/24/572719428/gourmet-sprinkles-makes-sweets-and-other-treats-sparkle"))
-    text = doc.css("div#storytext.storytext.storylocation.linkLocation").text
-    f = Nokogiri::XML.fragment(text)
+  def add_text_author
+    doc = Nokogiri::HTML(open(self.url))
+    # @story_page_hash = {:text => nil, :author => nil}
+    #remove unwanted elements
+    f = Nokogiri::XML.fragment(doc)
     f.search("div.credit-caption div.caption-wrap").remove
-    puts f
+    f.search("div.enlarge-options button.enlargebtn").remove
+    f.search("div.credit-caption div.caption-wrap div.caption p").remove
+    f.search("div.credit-caption div.caption-wrap div.caption p b.credit").remove
+    f.search("div.imagewrap img src").remove
+    f.search("div.credit-caption div.caption-wrap span.credit").remove
 
-    # remove ("div.credit-caption div.caption-wrap").text
-    # remove ("div.enlarge-options button.enlargebtn").text
-    # remove ("div.credit-caption div.caption-wrap div.caption p").text
-    # revove ("...b.credit").text
-    # remove ("div.imagewrap img (src=)")
-    # remove ("div.credit-caption div.caption-wrap span.credit").text
-
-    # f = Nokogiri::XML.fragment(str)
-    # f.search('.//img').remove
-    # puts f
+    self.text = f.css("div#storytext.storytext.storylocation.linkLocation p").text
+    self.author = doc.css("p.byline__name byline__name--block").text
   end
 
   def save
-    @@stories << self
+    @@all << self
   end
 
   def self.all
